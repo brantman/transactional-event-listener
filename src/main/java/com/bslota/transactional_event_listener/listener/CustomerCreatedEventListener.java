@@ -30,4 +30,12 @@ public class CustomerCreatedEventListener {
         LOGGER.info("Event received: " + event);
         tokenGenerator.generateToken(event.getCustomer());
     }
+
+    @EventListener
+    public void synProcessCustomerCreatedEventWithRuntimeException(CustomerCreatedEvent event) {
+        LOGGER.debug("synchronously processing the event received: " + event);
+        tokenGenerator.generateToken(event.getCustomer());
+        throw new RuntimeException("Throw a runtime exception");
+    }
+
 }
